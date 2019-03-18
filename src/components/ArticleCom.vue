@@ -4,10 +4,11 @@
     <router-link :to="{name:'UserRoute',params:{name:article.author.loginname}}">作者：{{article.author.loginname}}</router-link>
     <span>浏览量:{{article.visit_count}}</span>
     <span>来自:{{article.tab}}</span>
+    <h3>{{article.title}}</h3>
     <div v-html="article.content" id="content"></div>
     <div id="reply">
       <div v-for="reply in article.replies" :key='reply.id' class="replySec">
-        <img :src="reply.author.avatar_url">
+        <router-link :to="{name:'UserRoute',params:{name:reply.author.loginname}}"><img :src="reply.author.avatar_url"></router-link>
         <div>
           <div>
             <span>{{reply.author.loginname}}</span>
@@ -76,7 +77,7 @@ export default {
   }
   #content{
     margin: 1rem auto 2rem auto;
-    padding: 1rem 0 2rem 1rem;
+    padding: 2rem 0 2rem 1rem;
     border-top: 1px solid green;
     border-bottom: 1px solid green;
   }

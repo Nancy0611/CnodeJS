@@ -1,7 +1,7 @@
 <template>
   <div class="secDiv">
     <div>
-      <img :src="userInfo.avatar_url">
+      <router-link :to="{name:'UserRoute',params:{name:userInfo.loginname}}"><img :src="userInfo.avatar_url"></router-link>
       <span>{{userInfo.loginname}}</span>
     </div>
     <p>分数：{{userInfo.score}}</p>
@@ -46,6 +46,7 @@ export default {
     border: 1px solid #ddd;
     word-break: break-all;
     font-size: 21px;
+    padding: 2rem;
   }
   img{
     width: 6rem;
