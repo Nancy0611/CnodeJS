@@ -1,5 +1,5 @@
 <template>
-  <div class="secDiv">
+  <div class="secDiv" v-loading="loading">
     <span class="marginSpan">发布于：{{createdTime}}</span>
     <router-link :to="{name:'UserRoute',params:{name:article.author.loginname}}">作者：{{article.author.loginname}}</router-link>
     <span class="marginSpan">浏览量:{{article.visit_count}}</span>
@@ -42,7 +42,8 @@ export default {
         content: '',
         create_at: '2017-04-130000',
         replies: ''
-      }
+      },
+      loading: true
     }
   },
   methods: {
@@ -53,6 +54,13 @@ export default {
   computed: {
     createdTime () {
       return String(this.article.create_at).match(/.{10}/)[0]
+    }
+  },
+  watch: {
+    article (val) {
+      if (val) {
+        this.loading = false
+      }
     }
   },
   beforeCreate () {
@@ -98,7 +106,7 @@ export default {
   }
   .secDiv {
     width: 60%;
-    background: #fff;
+    background: #f9fafc;
     border: 1px solid #ddd;
     font-size: 20px;
     padding: 2rem;
@@ -119,6 +127,7 @@ export default {
     border: 1px solid #ddd;
     line-height: 1.6;
     padding-bottom: 1rem;
+    background: #eff2f7;
   }
   #reply{
     display: flex;

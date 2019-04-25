@@ -1,5 +1,5 @@
 <template>
-  <div class="secDiv">
+  <div class="secDiv" v-loading="loading">
     <div>
       <router-link :to="{name:'UserRoute',params:{name:userInfo.loginname}}"><img :src="userInfo.avatar_url"></router-link>
       <span>{{userInfo.loginname}}</span>
@@ -16,7 +16,8 @@ export default {
     return {
       userInfo: {
         avatar_url: ''
-      }
+      },
+      loading: true
     }
   },
   created () {
@@ -34,6 +35,13 @@ export default {
     }).catch((res) => {
       console.log('SideSec.vue:', res)
     })
+  },
+  watch: {
+    userInfo (val) {
+      if (val) {
+        this.loading = false
+      }
+    }
   }
 }
 </script>
@@ -42,19 +50,19 @@ export default {
   .secDiv{
     width: 20%;
     height: 20rem;
-    background: #fff;
+    background: #e5e9f2;
     border: 1px solid #ddd;
     word-break: break-all;
     font-size: 21px;
     padding: 2rem;
   }
-  .secDiv{
+  .secDiv div{
     display: flex;
     align-items: flex-end;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
   .secDiv div span{
-    font-size: 25px;
+    font-size: 30px;
     margin-left: 1rem;
     color: black;
   }

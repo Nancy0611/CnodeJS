@@ -1,5 +1,5 @@
 <template>
-  <div class="secDiv" v-on:scroll="scrollMethod">
+  <div class="secDiv" v-on:scroll="scrollMethod" v-loading="loading">
     <div v-for='item in content' :key="item.id">
       <router-link :to="{name:'UserRoute',params:{name:item.author.loginname}}"><img :src="item.author.avatar_url" :title="item.loginname"/></router-link>
       <div class="textDiv">
@@ -22,7 +22,8 @@ export default {
       item: {
         create_at: '2017-02-22T11:32:43.547Z'
       },
-      limit: 0
+      limit: 0,
+      loading: true
     }
   },
   methods: {
@@ -65,18 +66,27 @@ export default {
   },
   created () {
     this.getData()
+  },
+  watch: {
+    content (val) {
+      if (val) {
+        console.log(val)
+        this.loading = false
+      }
+    }
   }
 }
 </script>
 <style scoped>
   .secDiv{
     width: 60%;
-    background: #fff;
+    background: #f9fafc;
     border: 1px solid #ddd;
     display: flex;
     flex-direction: column;
     font-size: 22px;
     padding: 2rem;
+    min-height: 40rem;
   }
   a{
     text-decoration: none;

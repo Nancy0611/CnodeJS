@@ -1,6 +1,6 @@
 <template>
   <div class="secDiv">
-    <div class="profile">
+    <div class="profile" v-loading="loading">
       <div>
         <img :src="userInfo.avatar_url" :title="userInfo.loginname"/>
         <span>{{userInfo.loginname}}</span>
@@ -9,7 +9,7 @@
       <p><icon name="github" scale="4"></icon><span>Github:</span>https://github.com/{{userInfo.githubUsername}}</p>
       <p ><icon name="time" scale="4"></icon><span>注册时间:</span> {{dealCommentTime(userInfo.create_at)}}</p>
     </div>
-    <div class="recentReplies">
+    <div class="recentReplies" v-loading="loading">
       <p>最近参与的话题</p>
       <template v-for="(item,index) in userInfo.recent_replies">
         <div v-if="index<4 && item" :key="item.id">
@@ -20,7 +20,7 @@
         </div>
       </template>
     </div>
-    <div class="recentTopics">
+    <div class="recentTopics" v-loading="loading">
       <p>最近创建的话题</p>
       <template v-for='(item,index) in userInfo.recent_topics'>
         <div v-if="index<5 && item" :key="item.id">
@@ -40,7 +40,8 @@ export default {
     return {
       userInfo: {
         create_at: '2017-04-130000'
-      }
+      },
+      loading: true
     }
   },
   created () {
@@ -69,6 +70,13 @@ export default {
       console.log('UserCom.vue:', res)
     })
     next()
+  },
+  watch: {
+    userInfo (val) {
+      if (val) {
+        this.loading = false
+      }
+    }
   }
 }
 </script>
@@ -82,6 +90,7 @@ export default {
   .profile{
     padding: 1rem;
     background: #EFF2F7;
+    border-radius: 0.3rem;
   }
   .profile div{
     margin-bottom: 1.5rem;
@@ -122,11 +131,13 @@ export default {
   .recentTopics{
     padding:1rem;
     background: #d3dce6;
+    border-radius: 0.3rem;
   }
   .recentReplies{
     background: #e5e9f2;
     padding: 1rem;
     margin: 1rem 0;
+    border-radius: 0.3rem;
   }
   .recentReplies div,
   .recentTopics div{
@@ -134,7 +145,7 @@ export default {
     align-items: center;
     margin: 1rem 0;
     border-bottom: 2px solid #c0ccda;
-    padding-bottom: 0.5rem;
+    padding-bottom: 1rem;
   }
   .recentTopics div{
     border-bottom: 2px solid #99a9bf;

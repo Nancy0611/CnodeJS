@@ -6,6 +6,7 @@ import router from './router'
 import VueResource from 'vue-resource'
 import ElementUI from 'element-ui'
 import Icon from 'vue-svg-icon/Icon.vue'
+import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.use(VueResource)
 Vue.use(ElementUI)

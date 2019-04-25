@@ -3,14 +3,40 @@
     <router-link to="/">
       <img src="../assets/cnodejs.svg" title="cnodejs.svg">
     </router-link>
-    <router-link to="/about">
-      <span>关于</span>
-    </router-link>
+    <el-button type='text' @click='dialogVisible=true'>关于</el-button>
+    <el-dialog title='Vue.js重写CnodeJS社区'  :visible='dialogVisible'  :before-close="handleClose">
+      <div class='dialogDiv'>
+        <p>作者:&nbsp;&nbsp;<a href='https://nancy0611.github.io/' target='_blank'>nancy</a></p>
+        <p>源代码:&nbsp;&nbsp;<a href='https://github.com/Nancy0611/CnodeJS' target='_blank'>Github</a></p>
+        <p>技术栈:</p>
+        <ul>
+          <li>Vue.js</li>
+          <li>Vue-router</li>
+          <li>Vue-resource</li>
+          <li>Element</li>
+          <li>CnodeJs API</li>
+        </ul>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-export default {}
+import ElButton from '../../node_modules/element-ui/packages/button/src/button.vue'
+
+export default {
+  data () {
+    return {
+      dialogVisible: false
+    }
+  },
+  components: {ElButton},
+  methods: {
+    handleClose (done) {
+      this.dialogVisible = false
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -27,7 +53,7 @@ export default {}
     height: 3.6rem;
     margin-left: 10rem;
   }
-  .head span{
+  .head>button{
     display: inline-block;
     float: right;
     line-height: 3.6rem;
@@ -36,5 +62,16 @@ export default {}
     font-size: 20px;
     color: white;
     letter-spacing: 2px;
+    padding-top: 0.2rem;
+  }
+  .head .dialogDiv{
+    font-size: 17px;
+  }
+  .head ul{
+    margin-left: 1rem;
+  }
+  .head a{
+    text-decoration: none;
+    color:#58b7ff
   }
 </style>
