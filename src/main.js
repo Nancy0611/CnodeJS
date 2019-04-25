@@ -4,9 +4,13 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueResource from 'vue-resource'
+import ElementUI from 'element-ui'
+import Icon from 'vue-svg-icon/Icon.vue'
 
 Vue.use(VueResource)
+Vue.use(ElementUI)
 Vue.config.productionTip = false
+Vue.component('icon', Icon)
 
 /* eslint-disable no-new */
 new Vue({
